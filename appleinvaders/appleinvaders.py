@@ -68,7 +68,6 @@ def green_apple_fall(apple):
             
 
 for i in range(number_of_green_apples):
-    # green_apples_spawn()
     clock.schedule(green_apples_spawn, i*2)
 
 ## Red Apples
@@ -85,7 +84,6 @@ def red_apple_fall(apple):
         apple.pos = (randint(8, WIDTH -  8), 16)
 
 for i in range(number_of_red_apples):
-    # red_apples_spawn()
     clock.schedule(red_apples_spawn, i*5)
 
 ## Game Loop
