@@ -7,46 +7,69 @@ TILESIZE = 32
 HTILES = 20
 VTILES = 15
 
-walking = True
+hero_walking = True
+enemy_walking = True
 
 ## Der Held
 hero = Actor("hero")
 hero.topleft = (10*TILESIZE, (7*TILESIZE))
 
 def hero_move():
-    global walking
+    global hero_walking
     if keyboard.left and hero.left > 0:
-        if walking:
+        if hero_walking:
             hero.x -= TILESIZE
-            walking = False
+            hero_walking = False
     if keyboard.right and hero.right < WIDTH:
-        if walking:
+        if hero_walking:
             hero.x += TILESIZE
-            walking = False
+            hero_walking = False
     if keyboard.up and hero.top > 0:
-        if walking:
+        if hero_walking:
             hero.y -= TILESIZE
-            walking = False
+            hero_walking = False
     if keyboard.down and hero.bottom < HEIGHT:
-        if walking:
+        if hero_walking:
             hero.y += TILESIZE
-            walking = False
+            hero_walking = False
 
 def on_key_up():
-    global walking
-    walking = True
+    global hero_walking, enemy_walking
+    hero_walking = True
+    enemy_walking = True
 
 ## Der Feind
 enemy = Actor("enemy")
 enemy.topleft = (12*TILESIZE, 0)
 
+def enemy_move():
+    global enemy_walking
+    enemy_new_x = enemy.x
+    enemy_new_y = enemy.y
+    if enemy.x > hero.x and enemy_walking:
+        enemy_new_x = enemy.x - TILESIZE
+        enemy_walking = False
+    elif enemy.x < hero.x and enemy_walking:
+        enemy_new_x = enemy.x + TILESIZE
+        enemy_walking = False
+    
+    if enemy.y > hero.y and enemy_walking:
+        enemy_new_y = enemy.y - TILESIZE
+        enemy_walking = False
+    elif enemy.y < hero.y and enemy_walking:
+        enemy_new_y = enemy.y + TILESIZE
+        enemy_walking = False
+    
+    if enemy_new_x != hero.x:
+        enemy.x = enemy_new_y
+    
+    if enemy_new_y != hero.y:
+        enemy.y = enemy_new_y
+
 def draw():
     screen.fill((128, 128, 130))
     enemy.draw()
     hero.draw()
-
-def enemy_move():
-    pass
 
 def update():
     hero_move()
