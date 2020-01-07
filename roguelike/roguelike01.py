@@ -1,5 +1,6 @@
 import pgzrun
 from random import choice, randint
+import sys
 
 WIDTH = 640
 HEIGHT = 480
@@ -7,42 +8,28 @@ TITLE = "Rogue 1"
 TILESIZE = 32
 HTILES = 20
 VTILES = 15
-MAXDIST = 4*TILESIZE
+MAXDIST = 5*TILESIZE
 
 LEVEL_1 = [
     "####################",
-    "#  #               #",
-    "#  #######  #####  #",
-    "#        #  #      #",
-    "#        #  #####  #",
-    "#######  #  #      #",
-    "#        #  #####  #",
-    "#  #######    #    #",
-    "#             #   g#",
-    "#  #################",
+    "#@ #               #",
+    "#  #   ##   ####   #",
+    "#       #   #      #",
+    "#       #   ####   #",
+    "#####   #   #      #",
+    "#       #   ####   #",
+    "#   #####          #",
+    "#                 E#",
+    "#   ################",
     "#                  #",
-    "##########  #####  #",
+    "#########    ###   #",
     "#            #     #",
     "#            #     #",
     "####################"
 ]
 
 hero_walking = True
-enemy_walking = True
-
-## Level
-
-walls = []
-
-def setup_maze(level):
-    for y in range (len(level)):
-        for x in range (len(level[y])):
-            sprite = level[y][x]
-            if sprite == "#":
-                wall = Actor("wall")
-                wall.topleft = (x*TILESIZE, y*TILESIZE)
-                walls.append(wall)
-                
+enemy_walking = False
 def legal_move(walls, actor):
     hits = []
     for wall in walls:
@@ -51,44 +38,38 @@ def legal_move(walls, actor):
 
 ## Der Held
 hero = Actor("hero")
-hero.topleft = (TILESIZE, TILESIZE)
 
 def hero_move():
     global hero_walking
     old_hero_x = hero.x
     old_hero_y = hero.y
-    if keyboard.left and hero.left > 0:
+    if keyboard.left:
         if hero_walking:
             hero.x -= TILESIZE
             hero_walking = False
-    if keyboard.right and hero.right < WIDTH:
+    if keyboard.right:
         if hero_walking:
             hero.x += TILESIZE
             hero_walking = False
-    if keyboard.up and hero.top > 0:
+    if keyboard.up:
         if hero_walking:
             hero.y -= TILESIZE
             hero_walking = False
-    if keyboard.down and hero.bottom < HEIGHT:
+    if keyboard.down:
         if hero_walking:
             hero.y += TILESIZE
             hero_walking = False
     
+    ## Kollision mit Wall
     if legal_move(walls, hero):
         hero.x = old_hero_x
         hero.y = old_hero_y
-
-def on_key_up():
-    global hero_walking, enemy_walking
-    hero_walking = True
-    enemy_walking = True
 
 def reset_hero(x, y):
     hero.topleft = (x*TILESIZE, y*TILESIZE)
 
 ## Der Feind
 enemy = Actor("enemy")
-enemy.topleft = (12*TILESIZE, TILESIZE)
 
 def enemy_move():
     global enemy_walking
@@ -118,7 +99,34 @@ def enemy_move():
         enemy.x = old_enemy_x
         enemy.y = old_enemy_y
 
+## User Input
+def on_key_down():
+    ## Spielende mit ESC
+    if keyboard.escape:
+        sys.exit()
 
+def on_key_up():
+    global hero_walking, enemy_walking
+    hero_walking = True
+    enemy_walking = True
+
+## Level
+walls = []
+
+def setup_maze(level):
+    for y in range (len(level)):
+        for x in range (len(level[y])):
+            sprite = level[y][x]
+            if sprite == "#":
+                wall = Actor("wall")
+                wall.topleft = (x*TILESIZE, y*TILESIZE)
+                walls.append(wall)
+            if sprite == "@":
+                hero.topleft = (x*TILESIZE, y*TILESIZE)
+            if sprite == "E":
+                enemy.topleft = (x*TILESIZE, y*TILESIZE)
+
+## Das Spiel
 setup_maze(LEVEL_1)
     
 def draw():
