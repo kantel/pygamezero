@@ -30,8 +30,8 @@ LEVEL_1 = [
 
 hero_walking = True
 enemy_walking = False
+
 def legal_move(walls, actor):
-    hits = []
     for wall in walls:
         if wall.colliderect(actor):
             return(True)
@@ -95,6 +95,7 @@ def enemy_move():
             enemy.x = choice([enemy.x + TILESIZE, enemy.x - TILESIZE])
         enemy_walking = False
 
+    ## Kollision mit Wall
     if legal_move(walls, enemy):
         enemy.x = old_enemy_x
         enemy.y = old_enemy_y
