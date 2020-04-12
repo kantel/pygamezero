@@ -1,6 +1,6 @@
 import pgzrun
 
-WIDTH = 640
+WIDTH = 680
 HEIGHT = 540
 TITLE = "Scrolling Background"
 
