@@ -11,7 +11,7 @@ class Layer(Actor):
         Actor.__init__(self, image)
         self.left = xpos
         self.scroll_speed = speed
-    
+
     def update(self):
         self.left -= self.scroll_speed
         if self.right < 0:
@@ -24,7 +24,7 @@ class Walker(Actor):
         self.pos = pos
         self.count = 0
         self.speed = 1
-    
+
     def update(self):
         self.count += self.speed
         if self.count > 20:
