@@ -1,12 +1,17 @@
 import pgzrun
 import math
 from random import randint
+import sys
 
 WIDTH = 680
 HEIGHT = 400
 TITLE = "Shmup 2"
 TILEWIDTH = 640
-NIRWANA = -2000, -2000  
+NIRWANA = -2000, -2000
+
+NO_ENEMYS = 9
+
+no_frames = 0
 
 class Layer(Actor):
     
@@ -28,6 +33,7 @@ class Ship(Actor):
         self.pos = pos
         self.frame = 0
         self.state = "ready"
+        self.hitpoints = 0
         
     def make_animation(self):
         if self.frame <= 5:
@@ -51,6 +57,9 @@ class Ship(Actor):
             self.state = "moving"
         else:
             self.state = "ready"
+        if self.hitpoints == NO_ENEMYS:
+            print("You Won!")
+            sys.exit()
     
     def check_edges(self):
         if self.y >= HEIGHT - 16:
@@ -82,6 +91,7 @@ class Enemy(Actor):
     def __init__(self, image, pos):
         Actor.__init__(self, image)
         self.pos = pos
+        self.start_pos = pos
         self.frame = 0
         self.speed = 1
     
@@ -107,7 +117,7 @@ class Enemy(Actor):
         if self.frame >= 30:
             self.frame = 0
         self.frame += 1
-
+    
     def hit(self, bullet):
         a = self.x - bullet.x
         b = self.y - bullet.y
@@ -115,19 +125,22 @@ class Enemy(Actor):
         if d < 20:
             bullet.state = "ready"
             bullet.pos = NIRWANA
-            self.x = WIDTH + 20
+            self.pos = NIRWANA
+            player.hitpoints += 1
+            print("Score " + str(player.hitpoints))
+            
     
 bg1 = Layer("bg", 0)
 bg2 = Layer("bg", 1188)
 layers = [bg1, bg2]
 
 enemy_pos = []
-for i in range(8):
+for i in range(NO_ENEMYS):
     enemy_pos.append((WIDTH + 20, (i+1)*40))
 
-enemies = []
+enemys = []
 for i in range(len(enemy_pos)):
-    enemies.append(Enemy("enemy1", enemy_pos[i]))
+    enemys.append(Enemy("enemy1", enemy_pos[i]))
     
 player = Ship("ship1", (60, HEIGHT/2))
 bullet = Bullet("laserred")
@@ -135,7 +148,7 @@ bullet = Bullet("laserred")
 def draw():
     for layer in layers:
         layer.draw()
-    for enemy in enemies:
+    for enemy in enemys:
         enemy.draw()
     bullet.draw()
     player.draw()
@@ -143,13 +156,14 @@ def draw():
 def update():
     for layer in layers:
         layer.update()
-    bullet.update() 
-    for enemy in enemies:
+    for enemy in enemys:
         enemy.make_animation()
         enemy.update()
         enemy.hit(bullet)
+    bullet.update() 
     player.make_animation()
     player.update()
     player.check_edges()
+
 
 pgzrun.go()
