@@ -1,6 +1,5 @@
 import pgzrun
 import math
-from random import randint
 import sys
 
 WIDTH = 680
@@ -8,10 +7,7 @@ HEIGHT = 400
 TITLE = "Shmup 2"
 TILEWIDTH = 640
 NIRWANA = -2000, -2000
-
 NO_ENEMYS = 9
-
-no_frames = 0
 
 class Layer(Actor):
     
@@ -32,7 +28,6 @@ class Ship(Actor):
         self.state = "ready"
         self.pos = pos
         self.frame = 0
-        self.state = "ready"
         self.hitpoints = 0
         
     def make_animation(self):
@@ -129,7 +124,6 @@ class Enemy(Actor):
             player.hitpoints += 1
             print("Score " + str(player.hitpoints))
             
-    
 bg1 = Layer("bg", 0)
 bg2 = Layer("bg", 1188)
 layers = [bg1, bg2]
@@ -164,6 +158,5 @@ def update():
     player.make_animation()
     player.update()
     player.check_edges()
-
 
 pgzrun.go()
