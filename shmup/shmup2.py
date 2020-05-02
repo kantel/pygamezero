@@ -68,7 +68,7 @@ class Bullet(Actor):
         Actor.__init__(self, image)
         self.state = "ready"
         self.pos = NIRWANA
-        self.speed = 10
+        self.speed = 20
 
     def update(self):
         if keyboard.space:
