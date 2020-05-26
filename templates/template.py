@@ -9,5 +9,5 @@ def on_key_down():
     ## Spielende mit ESC
     if keyboard.escape:
         sys.exit()
-
+        
 pgzrun.go()
