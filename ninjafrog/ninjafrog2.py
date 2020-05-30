@@ -23,8 +23,8 @@ jumped = False
 allow_x = True
 timer = []
 
-platform_x = [20, 180, 360, 540, 100, 480, 20, 180, 360, 540, 280]
-platform_y = [120, 120, 120, 120, 220, 220, 320, 320, 320, 320, 400]
+platform_x = [20, 540, 100, 480, 180, 360, 280]
+platform_y = [100, 100, 200, 200, 300, 300, 400]
 platforms = []
 for i in range(len(platform_x)):
     platforms.append(Actor("platform", (platform_x[i] + 40, platform_y[i])))
@@ -91,7 +91,7 @@ def ninja_move():
         jumped = True
         clock.schedule_unique(jumped_recently, 0.4)
         ninja.image = "ninja_jump"
-        ninja_y_velocity = 95
+        ninja_y_velocity = 92
     if jumping and ninja_y_velocity > 25:
         ninja_y_velocity = ninja_y_velocity - ((100 - ninja_y_velocity)/2)
         ninja.y -= ninja_y_velocity/3
