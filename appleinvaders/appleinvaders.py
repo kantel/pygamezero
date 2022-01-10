@@ -98,6 +98,10 @@ def draw():
         for apple in red_apples:
             apple.draw()
     else:
+        for apple in green_apples:
+            apple.draw()
+        for apple in red_apples:
+            apple.draw()
         gripe.image = "gdie"
         screen.draw.text("Game Over", center = (CENTER, HEIGHT/2), color = "red", fontsize = 64)
     
