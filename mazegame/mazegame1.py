@@ -1,3 +1,7 @@
+# Simple Maze Game with Pygame Zero (v 1.2) , Python 3 
+# Stage 1 (Initialisierung und Kollisionserkennung)
+# Jörg Kantel 2022 (MIT-Lizenz)
+
 import pgzrun
 
 # WIDTH: 25 Tiles á 16 Pixel + je 20 Pixel Rand
@@ -5,6 +9,9 @@ WIDTH = 440
 # HEIGHT: 25 Tiles á 16 Pixel + je 20 Pixel Rand
 HEIGHT = 440
 TITLE = "Mazegame Stage 1"
+
+WALL  = 63
+CHEST = 22
 
 margin_x = 20
 margin_y = 20
@@ -18,63 +25,98 @@ maze_map = [[63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,6
             [63,63,63,63,63,63,-1,-1,63,63,-1,-1,63,63,63,-1,-1,-1,-1,-1,-1,-1,-1,63,63],
             [63,63,63,63,63,63,-1,-1,63,63,-1,-1,63,63,63,63,63,63,-1,-1,63,63,63,63,63],
             [63,63,63,63,63,63,-1,-1,63,63,-1,-1,-1,-1,63,63,63,63,-1,-1,63,63,63,63,63],
-            [63,-1,-1,63,63,63,-1,-1,-1,-1,-1,-1,-1,-1,63,63,63,63,-1,-1,63,63,63,63,63],
+            [63,-1,-1,63,63,63,-1,-1,-1,-1,-1,-1,-1,-1,63,63,63,63,22,-1,63,63,63,63,63],
             [63,-1,-1,63,63,63,-1,-1,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63],
             [63,-1,-1,-1,-1,-1,-1,-1,-1,-1,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63],
             [63,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,63,63,63,63,63,63,63,63],
-            [63,63,63,63,63,63,63,63,63,63,63,63,-1,-1,-1,-1,-1,63,63,63,63,63,-1,-1,63],
+            [63,63,63,63,63,63,63,63,63,63,63,63,-1,-1,-1,-1,-1,63,63,63,63,63,-1,22,63],
             [63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,-1,-1,63,63,63,63,63,-1,-1,63],
             [63,-1,-1,63,63,63,63,63,63,63,63,63,63,63,63,-1,-1,-1,-1,-1,-1,-1,-1,-1,63],
             [63,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,63],
             [63,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,63,63,63,63,63,63,63,63,63,63,63,63,63],
             [63,63,63,63,63,63,63,63,63,63,-1,-1,63,63,63,63,63,63,63,63,63,63,63,63,63],
             [63,63,63,63,63,63,63,63,63,63,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,63],
-            [63,-1,-1,-1,63,63,63,63,63,63,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,63],
+            [63,22,-1,-1,63,63,63,63,63,63,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,63],
             [63,-1,-1,-1,63,63,63,63,63,63,63,63,63,63,63,63,63,63,-1,-1,63,63,63,63,63],
             [63,-1,-1,-1,-1,-1,63,63,63,63,63,63,63,63,63,63,63,63,-1,-1,63,63,63,63,63],
             [63,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,63,63,63,63,-1,-1,-1,-1,-1,-1,-1,-1,63],
             [63,63,63,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,63],
             [63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63,63]]
 
-chest = Actor("chest16")
-chest_x = 18
-chest_y = 8
-chest.topleft = margin_x + chest_x*sz, margin_y + chest_y*sz
-
+walls      = []
+chests     = []
+walls_pos  = []
+chests_pos = []
+for y in range(25):
+    for x in range(25):
+        if maze_map[y][x] == WALL:
+            wall = Actor("wall16.png")
+            wall.topleft = margin_x + x*sz, margin_y + y*sz
+            walls.append(wall)
+            walls_pos.append((margin_x + x*sz, margin_y + y*sz))
+        if maze_map[y][x] == CHEST:
+            chest = Actor("chest16.png")
+            chest.topleft = margin_x + x*sz, margin_y + y*sz
+            chests.append(chest)
+            chests_pos.append((margin_x + x*sz, margin_y + y*sz))
+                
 rogue = Actor("rogue16")
 rogue_x = 1
 rogue_y = 1
 rogue.topleft = margin_x + rogue_x*sz, margin_y + rogue_y*sz
 
-def move_actor(x, y):
-    pass
-
 def update():
-    pass
+    global dir, rogue_x, rogue_y
+    if dir == "left":
+        move_to_x = margin_x + (rogue_x*sz) - sz
+        move_to_y = margin_y + rogue_y*sz
+        dir = None
+        if (move_to_x, move_to_y) not in walls_pos:   # Kollisionserkennung
+            rogue.topleft = move_to_x, move_to_y
+            rogue_x -= 1
+    elif dir == "right":
+        move_to_x = margin_x + (rogue_x*sz) + sz
+        move_to_y = margin_y + rogue_y*sz
+        dir = None
+        if (move_to_x, move_to_y) not in walls_pos:   # Kollisionserkennung
+            rogue.topleft = move_to_x, move_to_y
+            rogue_x += 1
+    elif dir == "up":
+        move_to_x = margin_x + rogue_x*sz
+        move_to_y = margin_y + (rogue_y*sz) - sz
+        dir = None
+        if (move_to_x, move_to_y) not in walls_pos:   # Kollisionserkennung
+            rogue.topleft = move_to_x, move_to_y
+            rogue_y -= 1
+    elif dir == "down":
+        move_to_x = margin_x + rogue_x*sz
+        move_to_y = margin_y + (rogue_y*sz) + sz
+        dir = None
+        if (move_to_x, move_to_y) not in walls_pos:   # Kollisionserkennung
+            rogue.topleft = move_to_x, move_to_y
+            rogue_y += 1
     
-
 def draw():
-    screen.clear()
     screen.fill((90, 90, 90))
-    for y in range(25):
-        for x in range(25):
-            if maze_map[y][x] == 63:
-                screen.blit("wall16.png", (margin_x + x*sz, margin_y + y*sz))
-    chest.draw()
+    
+    for wall in walls:
+        wall.draw()
+    for chest in chests:
+        chest.draw()
     rogue.draw()
 
 def on_key_down(key):
-    global rogue_x, rogue_y
+    global dir
     if key == keys.LEFT:
-        # rogue_x -= 1
-        # if maze_map[rogue.x - 1][rogue_y] != -1:
-        #     rogue_x -= sx 
-        rogue.x -= sz
+        dir = "left"
     elif key == keys.RIGHT:
-        rogue.x += sz
+        dir = "right"
     elif key == keys.UP:
-        rogue.y -= sz
+        dir = "up"
     elif key == keys.DOWN:
-        rogue.y += sz
-
+        dir = "down"
+    if key == keys.ESCAPE:              # ESCAPE beendet das Spiel
+        print("Bye, bye, Baby!")
+        quit()
+        
 pgzrun.go()
