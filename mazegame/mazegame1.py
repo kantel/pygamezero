@@ -1,5 +1,7 @@
 # Simple Maze Game with Pygame Zero (v 1.2) , Python 3 
 # Stage 1 (Initialisierung und Kollisionserkennung)
+# Assets: DawnLike-Tileset (CC BY 4.0) by DawnBringer und DragonDePlatino
+# (https://opengameart.org/content/dawnlike-16x16-universal-rogue-like-tileset-v181)
 # Jörg Kantel 2022 (MIT-Lizenz)
 
 import pgzrun
