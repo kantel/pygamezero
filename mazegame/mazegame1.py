@@ -52,12 +52,12 @@ chests_pos = []
 for y in range(25):
     for x in range(25):
         if maze_map[y][x] == WALL:
-            wall = Actor("wall16.png")
+            wall = Actor("wall16")
             wall.topleft = margin_x + x*sz, margin_y + y*sz
             walls.append(wall)
             walls_pos.append((margin_x + x*sz, margin_y + y*sz))
         if maze_map[y][x] == CHEST:
-            chest = Actor("chest16.png")
+            chest = Actor("chest16")
             chest.topleft = margin_x + x*sz, margin_y + y*sz
             chests.append(chest)
             chests_pos.append((margin_x + x*sz, margin_y + y*sz))
