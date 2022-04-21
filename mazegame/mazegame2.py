@@ -88,12 +88,15 @@ class Rogue(Actor):
         self.image = image
         self.xpos = 1   # x-Position im Grid
         self.ypos = 1   # y-Position im Grid
-        self.set_screen_pos()
+        # Rogue ohne Animation auf Startposition setzen
+        self.topleft = margin_x + self.xpos*sz, margin_y + self.ypos*sz
         self.dir = None
         self.score = 0
 
     def set_screen_pos(self):
-        self.topleft = margin_x + self.xpos*sz, margin_y + self.ypos*sz
+        x, y = margin_x + self.xpos*sz + 0.5*sz, margin_y + self.ypos*sz + 0.5*sz
+        animate(self, duration = .2, pos = (x, y))
+
         
     def walk(self):
         if self.dir == "left":
