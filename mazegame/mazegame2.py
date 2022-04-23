@@ -158,7 +158,8 @@ def init_game():
                 chest = Chest("chest16")
                 chest.set_screen_pos(x, y)
                 chests.append(chest)
-                chests_pos.append((x, y))                
+                chests_pos.append((x, y))
+
 def update():
     rogue.walk()
     for chest in chests:
