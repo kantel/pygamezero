@@ -18,7 +18,7 @@ class Rocket(Actor):
         self.velocity = PVector(0, 0)
         self.frame = 0
         self.angle = 90
-        self.topspeed = 10
+        self.topspeed = 5   # 10
 
     def update(self):
         mouse_x, mouse_y = pygame.mouse.get_pos()
