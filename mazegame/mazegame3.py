@@ -94,7 +94,7 @@ class Enemy(Actor):
         self.ypos = y
         self.direction = choice(directions)
         self.timer = 0
-        self.maxtime = randint(5, 10)
+        self.maxtime = randint(10, 15)
 
     def set_screen_pos(self):
         x, y = margin_x + self.xpos*sz + 0.5*sz, margin_y + self.ypos*sz + 0.5*sz
@@ -228,7 +228,7 @@ def update():
     rogue.walk()
     for enemy in enemies:
         # Zweiprozentige Wahrscheinlichkeit eines Richtungswechsels ohne Kollision
-        if randint(0, 100) < 2:
+        if randint(0, 1000) < 2:
             enemy.direction = choice(directions)
         enemy.timer += 1
         if enemy.timer == enemy.maxtime:   
