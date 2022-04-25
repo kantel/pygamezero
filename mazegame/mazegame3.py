@@ -227,7 +227,7 @@ def init_game():
 def update():
     rogue.walk()
     for enemy in enemies:
-        # Zweiprozentige Wahrscheinlichkeit eines Rchtungswechsels ohne Kollision
+        # Zweiprozentige Wahrscheinlichkeit eines Richtungswechsels ohne Kollision
         if randint(0, 100) < 2:
             enemy.direction = choice(directions)
         enemy.timer += 1
