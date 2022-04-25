@@ -11,7 +11,7 @@ from random import choice, randint
 WIDTH = 440
 # HEIGHT: 25 Tiles á 16 Pixel + je 20 Pixel Rand
 HEIGHT = 440
-TITLE = "Mazegame Stage 2"
+TITLE = "Mazegame Stage 3"
 
 WALL  = 63
 DOOR  = 62
