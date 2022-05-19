@@ -99,7 +99,6 @@ for _ in range(no_enemies):
     enemy = Enemy(enemyship, randint(WIDTH + 50, WIDTH + 750), randint(50, groundlevel))
     enemies.append(enemy)
 
-
 def update():
     for back in backs:
         back.x -= 0.4
