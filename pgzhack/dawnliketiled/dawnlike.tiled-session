@@ -1,0 +1,56 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "pgzhack01.tmx",
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "Door0.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Floor.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Tree0.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "pgzhack01.tmx": {
+            "scale": 1,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 240.5,
+                "y": 191
+            }
+        }
+    },
+    "last.exportedFilePath": "/Users/admin/git/pygamezero/pgzhack/dawnliketiled",
+    "last.imagePath": "/Users/admin/git/pygamezero/pgzhack/assets/DawnLike_4/Objects",
+    "map.height": 17,
+    "map.lastUsedExportFilter": "Tiled-Kartendateien (*.tmx *.xml)",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "openFiles": [
+        "pgzhack01.tmx",
+        "Door0.tsx",
+        "Floor.tsx",
+        "Tree0.tsx"
+    ],
+    "project": "dawnlike.tiled-project",
+    "recentFiles": [
+        "Tree0.tsx",
+        "Floor.tsx",
+        "Door0.tsx",
+        "pgzhack01.tmx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}
