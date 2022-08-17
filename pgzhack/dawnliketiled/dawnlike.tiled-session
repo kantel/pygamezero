@@ -6,7 +6,16 @@
     "activeFile": "pgzhack01.tmx",
     "expandedProjectPaths": [
     ],
+    "exportAsImage.drawTileGrid": false,
+    "exportAsImage.includeBackgroundColor": false,
+    "exportAsImage.useCurrentScale": false,
+    "exportAsImage.visibleLayersOnly": false,
+    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
+        "/Users/admin/Desktop/scut/Scut 7DRL Tilemaps Itch/PetesTiledExperiments.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "Door0.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 1
@@ -23,18 +32,21 @@
             "scale": 1,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 240.5,
-                "y": 191
+                "x": 233.5,
+                "y": 183
             }
         }
     },
     "last.exportedFilePath": "/Users/admin/git/pygamezero/pgzhack/dawnliketiled",
     "last.imagePath": "/Users/admin/git/pygamezero/pgzhack/assets/DawnLike_4/Objects",
+    "map.fixedSize": true,
     "map.height": 17,
     "map.lastUsedExportFilter": "Tiled-Kartendateien (*.tmx *.xml)",
     "map.lastUsedFormat": "tmx",
+    "map.orientation": 1,
     "map.tileHeight": 16,
     "map.tileWidth": 16,
+    "map.width": 16,
     "openFiles": [
         "pgzhack01.tmx",
         "Door0.tsx",
@@ -46,11 +58,19 @@
         "Tree0.tsx",
         "Floor.tsx",
         "Door0.tsx",
-        "pgzhack01.tmx"
+        "pgzhack01.tmx",
+        "/Users/admin/Desktop/scut/Scut 7DRL Tilemaps Itch/PetesTiledExperiments.tsx"
     ],
+    "tileset.embedInMap": false,
+    "tileset.lastUsedFilter": "All Files (*)",
     "tileset.lastUsedFormat": "tsx",
+    "tileset.margin": 0,
+    "tileset.spacing": 0,
     "tileset.tileSize": {
         "height": 16,
         "width": 16
-    }
+    },
+    "tileset.transparentColor": "#ff00ff",
+    "tileset.type": 0,
+    "tileset.useTransparentColor": false
 }
