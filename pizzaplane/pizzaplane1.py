@@ -17,12 +17,13 @@ BG_WIDTH2   = 533           # BGWIDTH//2 (abgerundet)
 BACKGROUND = "desert"
 PLANE_X = 70                # X-Position des Fliegers (bleibt fest)
 
-# Actors
+# Init Game
 # Hintergrund
+backs = []
 back0 = Actor(BACKGROUND, (LEFT, BOTTOM))
 back1 = Actor(BACKGROUND, (BG_WIDTH + LEFT, BOTTOM))
 backs = [back0, back1]
-# Player
+# Player (Flieger)
 plane_image = []
 for i in range(3):
     img = "planered_" + str(i)
@@ -32,12 +33,11 @@ plane.r = 0
 plane.updown = 3
 plane.dir = "NONE"
 
-
 def update():
     ## Background
     for back in backs:
         back.x -= 1          
-        if back.x <= -BG_WIDTH/2:
+        if back.x <= -BG_WIDTH2:
             back.x = BG_WIDTH + BG_WIDTH2
     ## Flieger
     if plane.dir == "NONE":
@@ -54,7 +54,6 @@ def update():
         plane.r = 0
             
 def draw():
-    global r
     screen.fill("#94b0c2")  # Light gray
     for back in backs:
         back.draw()
@@ -73,5 +72,5 @@ def on_key_down():
 
 def on_key_up():
     plane.dir = "NONE"
-
+    
 pgzrun.go()
