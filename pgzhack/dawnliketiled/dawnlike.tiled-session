@@ -29,11 +29,11 @@
             "scaleInEditor": 1
         },
         "pgzhack01.tmx": {
-            "scale": 1,
+            "scale": 1.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 233.5,
-                "y": 183
+                "x": 237.66666666666663,
+                "y": 123.33333333333331
             }
         }
     },
