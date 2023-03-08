@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "pgzhack01.tmx",
+    "activeFile": "",
     "expandedProjectPaths": [
     ],
     "exportAsImage.drawTileGrid": false,
@@ -32,8 +32,8 @@
             "scale": 1.5,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 237.66666666666663,
-                "y": 123.33333333333331
+                "x": 232.99999999999997,
+                "y": 118.66666666666666
             }
         }
     },
@@ -48,10 +48,6 @@
     "map.tileWidth": 16,
     "map.width": 16,
     "openFiles": [
-        "pgzhack01.tmx",
-        "Door0.tsx",
-        "Floor.tsx",
-        "Tree0.tsx"
     ],
     "project": "dawnlike.tiled-project",
     "recentFiles": [
