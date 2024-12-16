@@ -6,12 +6,11 @@ TITLE = "🐍🐍 Hällo Alien 🐍🐍"
 
 alien = Actor("alien")
 alien.pos = (200, 250)
-
-hit = False
+alien.hit = False
 
 def draw():
     screen.fill((0, 80, 125))
-    if hit:
+    if alien.hit:
         screen.draw.textbox("Eek!", (100, 100, 200, 50))
     alien.draw()
 
@@ -25,14 +24,12 @@ def on_mouse_down(pos):
         set_alien_hurt()
 
 def set_alien_hurt():
-    global hit
     alien.image = "alien_hurt"
-    hit = True
+    alien.hit = True
     clock.schedule_unique(set_alien_normal, 1.0)
 
 def set_alien_normal():
-    global hit
     alien.image = "alien"
-    hit = False
+    alien.hit = False
 
 pgzrun.go()
